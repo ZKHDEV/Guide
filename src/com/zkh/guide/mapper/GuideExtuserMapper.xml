@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zkh.guide.mapper.GuideExtuserMapper">
+  <resultMap id="BaseResultMap" type="com.zkh.guide.po.GuideExtuser">
+    <id column="extuser_id" jdbcType="INTEGER" property="extuserId" />
+    <result column="extuser_name" jdbcType="VARCHAR" property="extuserName" />
+    <result column="extuser_age" jdbcType="TINYINT" property="extuserAge" />
+    <result column="extuser_sex" jdbcType="CHAR" property="extuserSex" />
+    <result column="extuser_head" jdbcType="VARCHAR" property="extuserHead" />
+    <result column="extuser_country" jdbcType="VARCHAR" property="extuserCountry" />
+    <result column="extuser_city" jdbcType="VARCHAR" property="extuserCity" />
+    <result column="extuser_post" jdbcType="VARCHAR" property="extuserPost" />
+    <result column="extuser_email" jdbcType="VARCHAR" property="extuserEmail" />
+    <result column="extuser_phone" jdbcType="CHAR" property="extuserPhone" />
+    <result column="extuser_hobby" jdbcType="VARCHAR" property="extuserHobby" />
+    <result column="extuser_likenum" jdbcType="INTEGER" property="extuserLikenum" />
+    <result column="extuser_modifiedon" jdbcType="CHAR" property="extuserModifiedon" />
+    <result column="extuser_user_id" jdbcType="INTEGER" property="extuserUserId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    extuser_id, extuser_name, extuser_age, extuser_sex, extuser_head, extuser_country, 
+    extuser_city, extuser_post, extuser_email, extuser_phone, extuser_hobby, extuser_likenum, 
+    extuser_modifiedon, extuser_user_id
+  </sql>
+  <select id="selectByExample" parameterType="com.zkh.guide.po.GuideExtuserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from guide_extuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from guide_extuser
+    where extuser_id = #{extuserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from guide_extuser
+    where extuser_id = #{extuserId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zkh.guide.po.GuideExtuserExample">
+    delete from guide_extuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zkh.guide.po.GuideExtuser">
+    insert into guide_extuser (extuser_id, extuser_name, extuser_age, 
+      extuser_sex, extuser_head, extuser_country, 
+      extuser_city, extuser_post, extuser_email, 
+      extuser_phone, extuser_hobby, extuser_likenum, 
+      extuser_modifiedon, extuser_user_id)
+    values (#{extuserId,jdbcType=INTEGER}, #{extuserName,jdbcType=VARCHAR}, #{extuserAge,jdbcType=TINYINT}, 
+      #{extuserSex,jdbcType=CHAR}, #{extuserHead,jdbcType=VARCHAR}, #{extuserCountry,jdbcType=VARCHAR}, 
+      #{extuserCity,jdbcType=VARCHAR}, #{extuserPost,jdbcType=VARCHAR}, #{extuserEmail,jdbcType=VARCHAR}, 
+      #{extuserPhone,jdbcType=CHAR}, #{extuserHobby,jdbcType=VARCHAR}, #{extuserLikenum,jdbcType=INTEGER}, 
+      #{extuserModifiedon,jdbcType=CHAR}, #{extuserUserId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zkh.guide.po.GuideExtuser">
+    insert into guide_extuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="extuserId != null">
+        extuser_id,
+      </if>
+      <if test="extuserName != null">
+        extuser_name,
+      </if>
+      <if test="extuserAge != null">
+        extuser_age,
+      </if>
+      <if test="extuserSex != null">
+        extuser_sex,
+      </if>
+      <if test="extuserHead != null">
+        extuser_head,
+      </if>
+      <if test="extuserCountry != null">
+        extuser_country,
+      </if>
+      <if test="extuserCity != null">
+        extuser_city,
+      </if>
+      <if test="extuserPost != null">
+        extuser_post,
+      </if>
+      <if test="extuserEmail != null">
+        extuser_email,
+      </if>
+      <if test="extuserPhone != null">
+        extuser_phone,
+      </if>
+      <if test="extuserHobby != null">
+        extuser_hobby,
+      </if>
+      <if test="extuserLikenum != null">
+        extuser_likenum,
+      </if>
+      <if test="extuserModifiedon != null">
+        extuser_modifiedon,
+      </if>
+      <if test="extuserUserId != null">
+        extuser_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="extuserId != null">
+        #{extuserId,jdbcType=INTEGER},
+      </if>
+      <if test="extuserName != null">
+        #{extuserName,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserAge != null">
+        #{extuserAge,jdbcType=TINYINT},
+      </if>
+      <if test="extuserSex != null">
+        #{extuserSex,jdbcType=CHAR},
+      </if>
+      <if test="extuserHead != null">
+        #{extuserHead,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserCountry != null">
+        #{extuserCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserCity != null">
+        #{extuserCity,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserPost != null">
+        #{extuserPost,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserEmail != null">
+        #{extuserEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserPhone != null">
+        #{extuserPhone,jdbcType=CHAR},
+      </if>
+      <if test="extuserHobby != null">
+        #{extuserHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserLikenum != null">
+        #{extuserLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="extuserModifiedon != null">
+        #{extuserModifiedon,jdbcType=CHAR},
+      </if>
+      <if test="extuserUserId != null">
+        #{extuserUserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zkh.guide.po.GuideExtuserExample" resultType="java.lang.Long">
+    select count(*) from guide_extuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update guide_extuser
+    <set>
+      <if test="record.extuserId != null">
+        extuser_id = #{record.extuserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.extuserName != null">
+        extuser_name = #{record.extuserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extuserAge != null">
+        extuser_age = #{record.extuserAge,jdbcType=TINYINT},
+      </if>
+      <if test="record.extuserSex != null">
+        extuser_sex = #{record.extuserSex,jdbcType=CHAR},
+      </if>
+      <if test="record.extuserHead != null">
+        extuser_head = #{record.extuserHead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extuserCountry != null">
+        extuser_country = #{record.extuserCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extuserCity != null">
+        extuser_city = #{record.extuserCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extuserPost != null">
+        extuser_post = #{record.extuserPost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extuserEmail != null">
+        extuser_email = #{record.extuserEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extuserPhone != null">
+        extuser_phone = #{record.extuserPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.extuserHobby != null">
+        extuser_hobby = #{record.extuserHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extuserLikenum != null">
+        extuser_likenum = #{record.extuserLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.extuserModifiedon != null">
+        extuser_modifiedon = #{record.extuserModifiedon,jdbcType=CHAR},
+      </if>
+      <if test="record.extuserUserId != null">
+        extuser_user_id = #{record.extuserUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update guide_extuser
+    set extuser_id = #{record.extuserId,jdbcType=INTEGER},
+      extuser_name = #{record.extuserName,jdbcType=VARCHAR},
+      extuser_age = #{record.extuserAge,jdbcType=TINYINT},
+      extuser_sex = #{record.extuserSex,jdbcType=CHAR},
+      extuser_head = #{record.extuserHead,jdbcType=VARCHAR},
+      extuser_country = #{record.extuserCountry,jdbcType=VARCHAR},
+      extuser_city = #{record.extuserCity,jdbcType=VARCHAR},
+      extuser_post = #{record.extuserPost,jdbcType=VARCHAR},
+      extuser_email = #{record.extuserEmail,jdbcType=VARCHAR},
+      extuser_phone = #{record.extuserPhone,jdbcType=CHAR},
+      extuser_hobby = #{record.extuserHobby,jdbcType=VARCHAR},
+      extuser_likenum = #{record.extuserLikenum,jdbcType=INTEGER},
+      extuser_modifiedon = #{record.extuserModifiedon,jdbcType=CHAR},
+      extuser_user_id = #{record.extuserUserId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zkh.guide.po.GuideExtuser">
+    update guide_extuser
+    <set>
+      <if test="extuserName != null">
+        extuser_name = #{extuserName,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserAge != null">
+        extuser_age = #{extuserAge,jdbcType=TINYINT},
+      </if>
+      <if test="extuserSex != null">
+        extuser_sex = #{extuserSex,jdbcType=CHAR},
+      </if>
+      <if test="extuserHead != null">
+        extuser_head = #{extuserHead,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserCountry != null">
+        extuser_country = #{extuserCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserCity != null">
+        extuser_city = #{extuserCity,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserPost != null">
+        extuser_post = #{extuserPost,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserEmail != null">
+        extuser_email = #{extuserEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserPhone != null">
+        extuser_phone = #{extuserPhone,jdbcType=CHAR},
+      </if>
+      <if test="extuserHobby != null">
+        extuser_hobby = #{extuserHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="extuserLikenum != null">
+        extuser_likenum = #{extuserLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="extuserModifiedon != null">
+        extuser_modifiedon = #{extuserModifiedon,jdbcType=CHAR},
+      </if>
+      <if test="extuserUserId != null">
+        extuser_user_id = #{extuserUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where extuser_id = #{extuserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zkh.guide.po.GuideExtuser">
+    update guide_extuser
+    set extuser_name = #{extuserName,jdbcType=VARCHAR},
+      extuser_age = #{extuserAge,jdbcType=TINYINT},
+      extuser_sex = #{extuserSex,jdbcType=CHAR},
+      extuser_head = #{extuserHead,jdbcType=VARCHAR},
+      extuser_country = #{extuserCountry,jdbcType=VARCHAR},
+      extuser_city = #{extuserCity,jdbcType=VARCHAR},
+      extuser_post = #{extuserPost,jdbcType=VARCHAR},
+      extuser_email = #{extuserEmail,jdbcType=VARCHAR},
+      extuser_phone = #{extuserPhone,jdbcType=CHAR},
+      extuser_hobby = #{extuserHobby,jdbcType=VARCHAR},
+      extuser_likenum = #{extuserLikenum,jdbcType=INTEGER},
+      extuser_modifiedon = #{extuserModifiedon,jdbcType=CHAR},
+      extuser_user_id = #{extuserUserId,jdbcType=INTEGER}
+    where extuser_id = #{extuserId,jdbcType=INTEGER}
+  </update>
+</mapper>

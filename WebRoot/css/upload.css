@@ -1,0 +1,114 @@
+.upload-area {
+    position: relative;
+    float: left;
+    margin-right: 30px;
+    width: 200px;
+    height: 200px;
+    background-color: #F5F5F5;
+}
+
+.upload-area .file-tips {
+    position: absolute;
+    top: 90px;
+    left: 10px;
+    padding: 0 15px;
+    width: 170px;
+    line-height: 1.4;
+    font-size: 12px;
+    color: #A8A8A3;
+    text-align: center;
+}
+
+.userup-icon {
+    display: inline-block;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+    vertical-align: -2px;
+}
+
+.uploadify-button {
+    line-height: 120px!important;
+    text-align: center;
+}
+
+.preview-area {
+    float: left;
+}
+
+.tcrop {
+    clear: right;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.update-pic .crop {
+    background: url("../img/mystery.png") no-repeat scroll center center #EEEEEE;
+    background-size: 100%;
+    float: left;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.crop100 {
+    height: 100px;
+    width: 100px;
+}
+
+.crop60 {
+    height: 60px;
+    margin-left: 20px;
+    width: 60px;
+}
+
+.update-pic .uppic-btn {
+    background-color: #06A7E1;
+    color: #ffffff;
+    text-decoration: none;
+    width: 90px;
+    height: 30px;
+    border: 2px solid #ffffff;
+    display: block;
+    float: left;
+    line-height: 26px;
+    text-align: center;
+}
+
+.update-pic .uppic-btn:link,
+.update-pic .uppic-btn:visited,
+{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.update-pic .uppic-btn:hover {
+    opacity: 0.8;
+}
+
+.update-pic .uppic-btn:active {
+    opacity: 0.6;
+}
+
+.update-pic .save-pic {
+    clear: left;
+    margin-right: 10px;
+}
+
+.update-pic .reupload-img {
+    clear: left;
+    background-color: #ffffff;
+    color: #06A7E1;
+}
+
+.preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    background: #fff;
+    display: none;
+}
