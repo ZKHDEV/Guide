@@ -76,15 +76,11 @@
 	<mvc:resources location="/img/" mapping="/img/**"/> -->
 	
 	<!--拦截器 -->
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean class="com.zkh.ssm.interceptor.LoginInterceptor"></bean>
+			<bean class="com.zkh.guide.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<bean class="***"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors> -->	
+	</mvc:interceptors>
 
 </beans>

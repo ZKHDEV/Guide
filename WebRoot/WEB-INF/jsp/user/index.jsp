@@ -24,7 +24,7 @@
     <div class="header">
         <div class="container">
             <div class="col-md-2 col-md-offset-1 col-sm-1 col-xs-12 hidden-xs">
-                <a href="./"><img class="banner" src="${pageContext.request.contextPath }/img/logo-png.png" alt=""></a>
+                <a href="${pageContext.request.contextPath }/index.action"><img class="banner" src="${pageContext.request.contextPath }/img/logo-png.png" alt=""></a>
             </div>
             <div class="col-md-7 col-sm-10 col-xs-10">
                 <div class="search">
@@ -134,7 +134,7 @@
                         <td>注册邮箱：</td>
                         <td>${user.userEmail}
                         	<c:if test="${user.userState == 0 }">
-                        		<a href="javascript:void(0)" onclick="showverifyemail()" style="color:red">未验证</a>                     
+                        		<a id="verifylink" style="color:red;" href="javascript:void(0)" onclick="sendverifycode('${pageContext.request.contextPath }/sendVerify.action')">未验证</a>                     
                         	</c:if>
                             <a href="javascript:void(0)" onclick="showchangeemail()" title="修改邮箱"><i class="icon-pencil"></i></a>
                         </td>
@@ -173,7 +173,7 @@
 
     <div class="accountbox changepwdpanel">
         <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-            <form id="changepwdform" action="${pageContext.request.contextPath }/Account/changePwd.action" method="post" autocomplete="off">
+            <form id="changepwdform" action="${pageContext.request.contextPath }/changePwd.action" method="post" autocomplete="off">
                 <h3>修改密码</h3><br>
                 <div class="col-md-6 col-sm-6">
                     <input type="hidden" name="oldpwd" id="oldpwd">
@@ -187,7 +187,7 @@
                     <input type="password" name="reppwd2" id="reppwd2">
                     <p>验证码</p>
                     <input type="text" name="code" id="code">
-                    <img class="verifyimg" src="${pageContext.request.contextPath }/verifyImg.action" onclick="changeverify()" alt="验证码">
+                    <img class="verifyimg" src="${pageContext.request.contextPath }/Account/verifyImg.action" onclick="changeverify()" alt="验证码">
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -204,7 +204,7 @@
 
     <div class="accountbox changeemailpanel">
         <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-            <form id="changeemailform" action="${pageContext.request.contextPath }/Account/changeEmail.action" method="post" autocomplete="off">
+            <form id="changeemailform" action="${pageContext.request.contextPath }/changeEmail.action" method="post" autocomplete="off">
                 <h3>修改邮箱</h3><br>
                 <div class="col-md-6 col-sm-6">
                     <input type="hidden" name="epwd2" id="epwd2">
@@ -212,9 +212,6 @@
                     <input type="text" name="email" id="email">
                     <p>密码</p>
                     <input type="password" name="epwd" id="epwd">
-                    <p>验证码</p>
-                    <input type="text" name="ecode" id="ecode">
-                    <img class="verifyimg" src="${pageContext.request.contextPath }/verifyImg.action" onclick="changeverify()" alt="验证码">
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -231,7 +228,7 @@
 
     <div class="accountbox changeuserpanel">
         <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-            <form id="changeuserform" action="${pageContext.request.contextPath }/Account/changeUser.action" method="post" autocomplete="off">
+            <form id="changeuserform" action="${pageContext.request.contextPath }/changeUser.action" method="post" autocomplete="off">
                 <h3>修改用户名</h3><br>
                 <div class="col-md-6 col-sm-6">
                     <input type="hidden" name="upwd" id="upwd">
@@ -241,29 +238,7 @@
                     <input type="password" name="upwd2" id="upwd2">
                     <p>验证码</p>
                     <input type="text" name="ucode" id="ucode">
-                    <img class="verifyimg" src="${pageContext.request.contextPath }/verifyImg.action" onclick="changeverify()" alt="验证码">
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <p class="error errormsg"></p><br>
-                        <ul class="list">
-                            <li><button type="submit" class="accountbtn confirmbtn">确定</button></li>
-                            <li><button type="button" onclick="hideaccountbox()" class="accountbtn cancelbtn">取消</button></li>
-                        </ul>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="accountbox verifyemailpanel">
-        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-            <form id="verifyemailform" action="${pageContext.request.contextPath }/Account/verifyEmail.action" method="post" autocomplete="off">
-                <h3>验证邮箱</h3><br>
-                <div class="col-md-6 col-sm-6">
-                    <p>输入收到的验证码</p>
-                    <input type="text" name="vcode" id="vcode">
-                    <a id="verifylink" class="error" href="javascript:void(0)" onclick="sendverifycode('${pageContext.request.contextPath }/Account/sendVerify.action')">再发送一次验证码</a>
+                    <img class="verifyimg" src="${pageContext.request.contextPath }/Account/verifyImg.action" onclick="changeverify()" alt="验证码">
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">

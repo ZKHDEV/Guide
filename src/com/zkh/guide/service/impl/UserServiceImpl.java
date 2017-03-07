@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		user.setUserModifiedon(dateFormat.format(new Date()));
 		user.setUserSubtime(dateFormat.format(new Date()));
 		user.setUserState((byte)0);
-		user.setUserVerify(CommonUtils.uuid().substring(0, 8).toUpperCase());
+		user.setUserVerify(CommonUtils.uuid().toUpperCase());
 		guideUserMapper.insert(user);
 		
 		GuideExtuser extuser = new GuideExtuser();
@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
 		user.setUserModifiedon(dateFormat.format(new Date()));
 		user.setUserEmail(email.toLowerCase());
 		user.setUserState((byte)0);
-		user.setUserVerify(CommonUtils.uuid().substring(0, 8).toUpperCase());
+		user.setUserVerify(CommonUtils.uuid().toUpperCase());
 		return guideUserMapper.updateByPrimaryKey(user) > 0;
 	}
 
@@ -130,6 +130,24 @@ public class UserServiceImpl implements UserService {
 		user.setUserModifiedon(dateFormat.format(new Date()));
 		user.setUserState(state);
 		return guideUserMapper.updateByPrimaryKey(user) > 0;
+	}
+
+	@Override
+	public Boolean updateStateByVerify(String userVerify) {
+		GuideUserExample guideUserExample = new GuideUserExample();
+		GuideUserExample.Criteria criteria = guideUserExample.createCriteria();
+		criteria.andUserVerifyEqualTo(userVerify);
+		criteria.andUserStateEqualTo((byte)0);
+		List<GuideUser> list = guideUserMapper.selectByExample(guideUserExample);
+		if(!(list.size()>0)){
+			return false;
+		}
+		
+		GuideUser user = list.get(0);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
+		user.setUserModifiedon(dateFormat.format(new Date()));
+		user.setUserState((byte)1);
+		return guideUserMapper.updateByPrimaryKey(user) > 0;	
 	}
 	
 }

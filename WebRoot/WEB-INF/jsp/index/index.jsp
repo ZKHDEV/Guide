@@ -1,4 +1,6 @@
 <%@ page import="java.net.URL"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.zkh.guide.po.GuideLink"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -22,7 +24,7 @@
 <body>
     <div class="header">
         <div class="col-md-2 col-md-offset-1 col-sm-1 col-xs-12 hidden-xs">
-            <a href="./"><img class="banner" src="${pageContext.request.contextPath }/img/logo-png.png" alt=""></a>
+            <a href="${pageContext.request.contextPath }/index.action"><img class="banner" src="${pageContext.request.contextPath }/img/logo-png.png" alt=""></a>
         </div>
         <div class="col-md-7 col-sm-10 col-xs-10">
             <div class="search">
@@ -67,23 +69,27 @@
             <ul class="list favsite">
             	<c:choose>
             		<c:when test="${favlinks != null}">
-            			<c:forEach items="${favlinks }" var="link">
+            			<%
+            				for(GuideLink link:(List<GuideLink>)request.getAttribute("favlinks")){
+            					URL url = new URL(link.getLinkUrl());
+            					String icoUrl = url.getProtocol()+"://"+url.getHost()+"/favicon.ico";	
+            			 %>
                         	<li>
-                            	<a href="${link.linkUrl }" title="${link.linkTitle }" target="_blank">
-                             		<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                            	<a href="<%=link.getLinkUrl() %>" title="<%=link.getLinkTitle() %>" target="_blank">
+                             		<img src="<%=icoUrl %>" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 	<hr>
                                 	<p>
-                                    	<nobr>${link.linkTitle}</nobr>
+                                    	<nobr><%=link.getLinkTitle() %></nobr>
                                 	</p>
                             	</a>
-                            	<a class="removefav editlabel" href="javascript:void(0)" onclick="confirm('确定要删除吗？')?delfavlink(${link.linkId},this):false"><i class="icon-trash"></i></a>
+                            	<a class="removefav editlabel" href="javascript:void(0)" onclick="confirm('确定要删除吗？')?delfavlink(<%=link.getLinkId() %>,this):false"><i class="icon-trash"></i></a>
                         	</li>
-                		</c:forEach>
+                		<%} %>
             		</c:when>
             		<c:otherwise>
             			<li>
                             <a href="http://u.ctrip.com/union/CtripRedirect.aspx?ocid=msnnavtopsite&TypeID=2&Allianceid=349539&sid=832632&OUID=&jumpUrl=http%3A%2F%2Fwww.ctrip.com%2F%3FAllianceid%3D349539%26sid%3D832632%26OUID%3D%26MultiUnionSupport%3Dtrue" title="携程" target="_blank">
-                             	<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                             	<img src="http://u.ctrip.com/favicon.ico" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 <hr>
                                 <p>
                                     <nobr>携程</nobr>
@@ -91,8 +97,8 @@
                             </a>
                         </li>
             			<li>
-                            <a href="https://s.click.taobao.com/wjkVV9x" title="淘宝" target="_blank">
-                             	<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                            <a href="https://www.taobao.com" title="淘宝" target="_blank">
+                             	<img src="https://www.taobao.com/favicon.ico" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 <hr>
                                 <p>
                                     <nobr>淘宝</nobr>
@@ -100,8 +106,8 @@
                             </a>
                         </li>
             			<li>
-                            <a href="https://c.duomai.com/track.php?site_id=223050&aid=61&euid=&t=http%3A%2F%2Fwww.jd.com%2F" title="京东" target="_blank">
-                             	<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                            <a href="https://www.jd.com" title="京东" target="_blank">
+                             	<img src="https://www.jd.com/favicon.ico" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 <hr>
                                 <p>
                                     <nobr>京东</nobr>
@@ -109,8 +115,8 @@
                             </a>
                         </li>
             			<li>
-                            <a href="https://c.duomai.com/track.php?site_id=223050&aid=3720&euid=topsite&t=http%3A%2F%2Fvip.iqiyi.com%2F" title="爱奇艺" target="_blank">
-                             	<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                            <a href="http://www.iqiyi.com" title="爱奇艺" target="_blank">
+                             	<img src="http://www.iqiyi.com/favicon.ico" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 <hr>
                                 <p>
                                     <nobr>爱奇艺</nobr>
@@ -119,7 +125,7 @@
                         </li>
             			<li>
                             <a href="http://news.sina.com.cn/?ocid=msnnavtopsite" title="新浪" target="_blank">
-                             	<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                             	<img src="http://news.sina.com.cn/favicon.ico" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 <hr>
                                 <p>
                                     <nobr>新浪</nobr>
@@ -127,8 +133,8 @@
                             </a>
                         </li>
             			<li>
-                            <a href="https://s.click.taobao.com/sfh3V9x" title="天猫" target="_blank">
-                             	<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                            <a href="https://www.tmall.com" title="天猫" target="_blank">
+                             	<img src="https://www.tmall.com/favicon.ico" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 <hr>
                                 <p>
                                     <nobr>天猫</nobr>
@@ -136,8 +142,8 @@
                             </a>
                         </li>
             			<li>
-                            <a href="https://outlook.live.com/" title="Outlook" target="_blank">
-                             	<img src="" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
+                            <a href="https://outlook.live.com" title="Outlook" target="_blank">
+                             	<img src="https://outlook.live.com/favicon.ico" onerror="this.src='${pageContext.request.contextPath }/img/web.ico'"/>           
                                 <hr>
                                 <p>
                                     <nobr>Outlook</nobr>
@@ -383,7 +389,7 @@
 
     <div class="accountbox loginpanel">
         <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-            <form id="loginform" action="${pageContext.request.contextPath }/login.action" method="post">
+            <form id="loginform" action="${pageContext.request.contextPath }/Account/login.action" method="post">
                 <h3>登录</h3><br>
                 <div class="col-md-6 col-sm-6">
                     <input type="hidden" name="password" id="pwd2">
@@ -393,7 +399,7 @@
                     <input type="password" name="pwd" id="pwd" maxlength="32">
                     <p>验证码</p>
                     <input type="text" name="vcode" id="code" autocomplete="off">
-                    <img class="verifyimg" src="${pageContext.request.contextPath }/verifyImg.action" onclick="changeverify()" alt="验证码">
+                    <img class="verifyimg" src="${pageContext.request.contextPath }/Account/verifyImg.action" onclick="changeverify()" alt="验证码">
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -419,7 +425,7 @@
                     <input type="text" name="fgemail" id="fgemail">
                     <p>验证码</p>
                     <input type="text" name="fgcode" id="fgcode">
-                    <img class="verifyimg" src="${pageContext.request.contextPath }/verifyImg.action" onclick="changeverify()" alt="验证码">
+                    <img class="verifyimg" src="${pageContext.request.contextPath }/Account/verifyImg.action" onclick="changeverify()" alt="验证码">
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -605,7 +611,7 @@
     </div>
     <div class="accountbox registerpanel">
         <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-            <form id="registerform" action="${pageContext.request.contextPath }/register.action" method="post" autocomplete="off">
+            <form id="registerform" action="${pageContext.request.contextPath }/Account/register.action" method="post" autocomplete="off">
                 <h3>注册</h3><br>
                 <div class="col-md-6 col-sm-6">
                     <input type="hidden" name="regpwd" id="regpwd">
@@ -620,7 +626,7 @@
                     <input type="text" name="regemail" id="regemail">
                     <p>验证码</p>
                     <input type="text" name="regcode" id="regcode">
-                    <img class="verifyimg" src="${pageContext.request.contextPath }/verifyImg.action" onclick="changeverify()" alt="验证码">
+                    <img class="verifyimg" src="${pageContext.request.contextPath }/Account/verifyImg.action" onclick="changeverify()" alt="验证码">
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12">

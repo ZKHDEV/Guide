@@ -29,7 +29,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 			Object handler) throws Exception {
 
 		String url = request.getRequestURI();
-		if(url.indexOf("login.action")>=0){
+		if(url.indexOf(request.getContextPath()+"/index.action")>=0){
+			return true;
+		}
+		if(url.indexOf("/Account")>=0){
 			return true;
 		}
 		
@@ -38,7 +41,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/jsp/index/index.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/index.action");
 		
 		return false;
 	}

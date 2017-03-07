@@ -106,6 +106,7 @@ $(function() {
                 success: function(data) {
                     var result = data.split(':');
                     if (result[0] === 'ok') {
+                    	alert("注册成功，请登录！");
                         window.location.reload();
                     } else {
                         $('#regpwd2,#rregpwd2').attr('disabled', false);
@@ -211,35 +212,6 @@ $(function() {
         }
     });
 
-    // 验证邮箱表单验证
-    $('#verifyemailform').validate({
-        event: 'keyup',
-        rules: {
-            vcode: { required: true }
-        },
-        messages: {
-            vcode: { required: '验证码必填。' }
-        },
-        errorPlacement: function(error, element) {
-            $('.errormsg').html('');
-            error.appendTo($('.verifyemailpanel .errormsg'));
-        },
-        submitHandler: function(form) {
-            $('.errormsg').html('');
-            $(form).ajaxSubmit({
-                success: function(data) {
-                    var result = data.split(':');
-                    if (result[0] === 'ok') {
-                        alert(result[1]);
-                        window.location.reload();
-                    } else {
-                        $('.verifyemailpanel .errormsg').html(result[1]);
-                    }
-                }
-            });
-        }
-    });
-
     // 修改邮箱表单验证
     $('#changeemailform').validate({
         event: 'keyup',
@@ -258,13 +230,11 @@ $(function() {
                     }
                 }
             },
-            epwd: { required: true },
-            ecode: { required: true }
+            epwd: { required: true }
         },
         messages: {
             email: { required: '新邮箱必填。', email: '邮箱格式错误。', remote: '邮箱已被注册。' },
-            epwd: { required: '密码必填。' },
-            ecode: { required: '验证码必填。' }
+            epwd: { required: '密码必填。' }
         },
         errorPlacement: function(error, element) {
             $('.errormsg').html('');
@@ -282,7 +252,7 @@ $(function() {
                         window.location.reload();
                     } else {
                         $('#epwd').attr('disabled', false);
-                        $('#ecode,#epwd,#epwd2').val('');
+                        $('#epwd,#epwd2').val('');
                         $('.changeemailpanel .errormsg').html(result[1]);
                         changeverify();
                     }

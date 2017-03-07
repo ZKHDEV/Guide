@@ -29,4 +29,6 @@ public interface UserService {
 	public GuideUser selectByPrimaryKey(Integer userId);
 	
 	public Boolean updateStateByPrimaryKey(GuideUser user,Byte state);
+	
+	public Boolean updateStateByVerify(String userVerify);
 }

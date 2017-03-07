@@ -13,8 +13,6 @@ public class ChangeEmailQueryVo {
 	@NotNull(message="{changeemailqv.email.length.error}")
 	@Email(message="{changeemailqv.email.pattern.error}")
 	private String email;
-	@NotNull(message="{changeemailqv.ecode.length.error}")
-	private String ecode;
 	
 	public String getEpwd2() {
 		return epwd2;
@@ -27,12 +25,6 @@ public class ChangeEmailQueryVo {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getEcode() {
-		return ecode;
-	}
-	public void setEcode(String ecode) {
-		this.ecode = ecode;
 	}
 	
 	
